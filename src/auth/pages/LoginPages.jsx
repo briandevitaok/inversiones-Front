@@ -6,11 +6,18 @@ import { AuthContext } from '../context/AuthContext';
 
 export const LoginPages = () => {
 
-  const { login } = useContext(AuthContext);
+
+  const {login} = useContext(AuthContext)
 
   const navigate = useNavigate();
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+
+    const inputEmail = (e) => {
+      const email = e.target.value
+      setEmail(email)
+    }
 
     const inputUser = (e) => {
         const user = e.target.value
@@ -28,7 +35,7 @@ export const LoginPages = () => {
         } else if (password <1) {
           return  new swal({icon: 'error', text:'El passsword debe ser correcto', title: 'Ops'});
         }
-        login(user)
+        login(user, email)
         navigate('/panel', {
             replace: true
         })
@@ -44,6 +51,13 @@ export const LoginPages = () => {
           className="form-control" 
           placeholder="Username"
           onChange={inputUser}
+          />
+          <br />
+          <input 
+          type="email" 
+          className="form-control" 
+          placeholder="Email"
+          onChange={inputEmail}
           />
            <br />
           <input 

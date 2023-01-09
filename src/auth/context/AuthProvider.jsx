@@ -1,59 +1,53 @@
-import { useReducer } from "react"
-import { types } from "../types/types"
-import { AuthContext } from "./AuthContext"
-import { authReducer } from "./AuthReducer"
-
-
-
+import { useReducer } from 'react';
+import { types } from '../types/types';
+import { AuthContext } from './AuthContext';
+import { authReducer } from './AuthReducer';
 
 const init = () => {
-    const user =  JSON.parse(localStorage.getItem('user'))
- 
- 
-    return {
-     logged: !!user, 
-     user: user
-    }
- }
- 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const email = JSON.parse(localStorage.getItem('email'));
 
+  return {
+    logged: !!user,
+    user: user,
+    email: email,
+    
+  };
+};
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
+  const [state, dispacht] = useReducer(authReducer, {}, init);
 
-    const [state, dispacht] = useReducer(authReducer, {}, init)
+  const login = (name = '', email='') => {
+    const action = {
+      type: types.login,
+      payload: name,
+      payload: email
+    };
 
-    const login = (name = '') => {
-        const action = {
-            type: types.login,
-            payload: name
-        }
-        console.log({name})
+    localStorage.setItem('user', JSON.stringify(name));
+    localStorage.setItem('email', JSON.stringify(email));
+    dispacht(action);
+  };
 
-        localStorage.setItem('user', JSON.stringify(name))
-        dispacht(action)
-     }
-
-     const logout = ()=>{
-
-        localStorage.removeItem('user')
-        const action = {
-            type: types.logout
-        }
-        dispacht(action)
-     }
+  const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('email');
+    const action = {
+      type: types.logout,
+    };
+    dispacht(action);
+  };
 
   return (
-    
-    <AuthContext.Provider value={{
+    <AuthContext.Provider
+      value={{
         ...state,
-           login,
-           logout 
-    }}>
-
-        { children }
-
+        login,
+        logout,
+      }}
+    >
+      {children}
     </AuthContext.Provider>
-
-
-  )
-}
+  );
+};

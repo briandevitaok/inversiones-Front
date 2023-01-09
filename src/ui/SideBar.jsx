@@ -3,6 +3,7 @@ import {
   Avatar,
   Box,
   Button,
+  Chip,
   Divider,
   Drawer,
   Grid,
@@ -16,17 +17,19 @@ import {
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useContext } from 'react';
 import { AuthContext } from '../auth/context/AuthContext';
-import logo from '../asset/img/mia.jpg'; // with import
-import { deepOrange } from '@mui/material/colors';
-
-
-
-
+import { useNavigate } from 'react-router-dom';
+import { deepOrange, pink, red } from '@mui/material/colors';
 
 export const SideBar = ({ drawWithd }) => {
-    const {user} = useContext(AuthContext)
+  
+  const { user, email } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    
+  const handleClick = () => {
+    navigate('/home', {
+      replace: true,
+    });
+  };
   return (
     <Box
       component="nav"
@@ -41,13 +44,11 @@ export const SideBar = ({ drawWithd }) => {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" className='center'>
-          
-
-            {/* <Avatar sx={{ width: 50, height: 50, bgcolor: deepOrange[500]}}>{user[1][2]}</Avatar> */}
-            <Button variant="contained" color="success">{user}</Button>
-
-  
+          <Typography variant="h6" noWrap component="div" className="center">
+            <Avatar sx={{ width: 50, height: 50, bgcolor: deepOrange[500] }}>
+              {user[1]}
+            </Avatar>
+          {email}
           </Typography>
         </Toolbar>
         <Divider />
@@ -56,16 +57,14 @@ export const SideBar = ({ drawWithd }) => {
             (text) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
-                  <AttachMoneyIcon>
+                  <AttachMoneyIcon sx={{ color: red[600] }}>
                     <TurnedInNot />
                   </AttachMoneyIcon>
                   <Grid container>
                     <ListItemText primary={text} />
-                    <ListItemText
-                      secondary={
-                        'Mis inversiones: $200000'
-                      }
-                    />
+                    <ListItemText secondary={'Valor invertido: $200000'} />
+                    <ListItemText secondary={'Rentabilidad: $200000'} />
+                    {/* <Chip label="Ver detalles" onClick={handleClick} /> */}
                   </Grid>
                 </ListItemButton>
               </ListItem>

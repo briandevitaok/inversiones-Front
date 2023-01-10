@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert2';
+import { useForms } from '../../hooks/useForm';
 import { AuthContext } from '../context/AuthContext';
 
 export const LoginPages = () => {
@@ -11,7 +12,9 @@ export const LoginPages = () => {
   const [email, setEmail] = useState('');
 
 
-  
+
+
+
   const inputEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
@@ -31,7 +34,7 @@ export const LoginPages = () => {
     if (name < 1) {
       return new swal({
         icon: 'error',
-        text: 'Debes poner un usuario correcto',
+        text: 'Debes poner un nombre correcto',
         title: 'Ops',
       });
     } 
@@ -42,8 +45,16 @@ export const LoginPages = () => {
         title: 'Ops',
       });
     }
-    
-    login(name, email, password);
+
+    else if (password < 1) {
+      return new swal({
+        icon: 'error',
+        text: 'El password debe ser correcto',
+        title: 'Ops',
+      });
+    } 
+    else{
+      login(name, email, password);
     try {
         let config = {
           method:'POST',
@@ -61,10 +72,13 @@ export const LoginPages = () => {
           )
         }
       let res = await fetch('http://localhost:3000/api/v1/users', config)
-      console.log(res)
     } catch (error) {
       console.log(error);
     }
+    }
+    
+    
+    
     navigate('/panel', {
       replace: true,
     });
@@ -81,14 +95,14 @@ export const LoginPages = () => {
             type="text"
             className="form-control"
             placeholder="Username"
-            onChange={inputUser}
+            onChange={inputEmail}
           />
           <br />
           <input
             type="email"
             className="form-control"
             placeholder="Email"
-            onChange={inputEmail}
+            onChange={inputUser}
           />
           <br />
           <input

@@ -46,7 +46,7 @@ export const SideBar = ({ drawWithd }) => {
         <Toolbar>
           <Typography variant="h6" noWrap component="div" className="center">
             <Avatar sx={{ width: 50, height: 50, bgcolor: deepOrange[500] }}>
-              {user[1]}
+              {user}
             </Avatar>
           {email}
           </Typography>

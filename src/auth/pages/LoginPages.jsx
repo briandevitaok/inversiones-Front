@@ -1,13 +1,14 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert2';
-import { useForms } from '../../hooks/useForm';
 import { AuthContext } from '../context/AuthContext';
+import axios from 'axios'
+import { fetchAxios } from '../../helpers/axios';
 
 export const LoginPages = () => {
-  const { login } = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
+  const [register, setRegister] = useState(false)
   const navigate = useNavigate();
-  const [name, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
@@ -20,10 +21,6 @@ export const LoginPages = () => {
     setEmail(email);
   };
 
-  const inputUser = (e) => {
-    const name = e.target.value;
-    setUser(name);
-  };
   const inputPassword = (e) => {
     const password = e.target.value;
 
@@ -31,14 +28,7 @@ export const LoginPages = () => {
   };
 
   const onLogin = async () => {
-    if (name < 1) {
-      return new swal({
-        icon: 'error',
-        text: 'Debes poner un nombre correcto',
-        title: 'Ops',
-      });
-    } 
-    else if (email < 1) {
+    if (email < 1) {
       return new swal({
         icon: 'error',
         text: 'El email debe ser correcto',
@@ -54,55 +44,25 @@ export const LoginPages = () => {
       });
     } 
     else{
-      login(name, email, password);
-    try {
-        let config = {
-          method:'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-          }
-          
-    
-          )
-        }
-      let res = await fetch('http://localhost:3000/api/v1/users', config)
-    } catch (error) {
-      console.log(error);
+      fetchAxios(email, password)
+      login(email, password)
+      
     }
-    }
-    
-    
-    
-    navigate('/panel', {
-      replace: true,
-    });
+   ;
   };
 
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="container mt-5 text-center">
         <h1>Login</h1>
         <hr />
-        <form>
+        <form >
           <input
             type="text"
             className="form-control"
-            placeholder="Username"
-            onChange={inputEmail}
-          />
-          <br />
-          <input
-            type="email"
-            className="form-control"
             placeholder="Email"
-            onChange={inputUser}
+            onChange={inputEmail}
           />
           <br />
           <input
@@ -112,6 +72,7 @@ export const LoginPages = () => {
             onChange={inputPassword}
           />
         </form>
+       
         <br />
         <button className="btn btn-primary" onClick={onLogin}>
           Iniciar Sesion

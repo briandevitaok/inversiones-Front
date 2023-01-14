@@ -1,14 +1,11 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios'
 import { fetchAxios } from '../../helpers/axios';
 
 export const LoginPages = () => {
   const {login} = useContext(AuthContext);
-  const [register, setRegister] = useState(false)
-  const navigate = useNavigate();
+  const [register, setRegister] = useState(true)
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
@@ -44,9 +41,10 @@ export const LoginPages = () => {
       });
     } 
     else{
-      fetchAxios(email, password)
+      const p = fetchAxios(email, password)
+      console.log(p);
       login(email, password)
-      
+      setRegister(false)
     }
    ;
   };
@@ -72,6 +70,9 @@ export const LoginPages = () => {
             onChange={inputPassword}
           />
         </form>
+        {
+          !register ? <span>Credenciales incorrectas</span>: null
+        }
        
         <br />
         <button className="btn btn-primary" onClick={onLogin}>

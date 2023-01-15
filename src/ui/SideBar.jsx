@@ -18,11 +18,13 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useContext } from 'react';
 import { AuthContext } from '../auth/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { deepOrange, pink, red } from '@mui/material/colors';
-
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import EmailIcon from '@mui/icons-material/Email';
+import PersonIcon from '@mui/icons-material/Person';
+import { red } from '@mui/material/colors';
 export const SideBar = ({ drawWithd }) => {
   
-  const { user, email } = useContext(AuthContext);
+  const { name, email, logged } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -45,15 +47,39 @@ export const SideBar = ({ drawWithd }) => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div" className="center">
-            <Avatar sx={{ width: 50, height: 50, bgcolor: deepOrange[500] }}>
-              {user}
-            </Avatar>
-          {email}
+          {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>{name[1]}</Avatar> */}
+          <List
+      sx={{
+        width: '100%',
+        maxWidth: 360,
+        bgcolor: 'background.paper',
+      }}
+    >
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <EmailIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={email}/>
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <PersonIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={`Usuario: ${name}`} secondary={ logged ? <span className='badge text-bg-success'>Activo</span>: null} />
+      </ListItem>
+      <Divider variant="inset" component="li" />
+    </List>
+          {/* {email} */}
           </Typography>
         </Toolbar>
         <Divider />
         <List>
-          {['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'].map(
+          {['Enero'].map(
             (text) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -64,6 +90,7 @@ export const SideBar = ({ drawWithd }) => {
                     <ListItemText primary={text} />
                     <ListItemText secondary={'Valor invertido: $200000'} />
                     <ListItemText secondary={'Rentabilidad: $200000'} />
+                    <ListItemText secondary={'Tiempo financiado: 5'} />
                     {/* <Chip label="Ver detalles" onClick={handleClick} /> */}
                   </Grid>
                 </ListItemButton>

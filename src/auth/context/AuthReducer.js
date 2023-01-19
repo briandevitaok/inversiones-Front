@@ -9,6 +9,7 @@ export const authReducer = (state = {}, action) => {
       return {
         ...state,
         logged: true,
+        admin: false,
         name: action.payload,
         email: action.payload,
         password: action.payload

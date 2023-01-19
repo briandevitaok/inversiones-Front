@@ -8,7 +8,7 @@ import { useForms } from '../../hooks/useForm';
 
 export const LoginPages = () => {
   const {login} = useContext(AuthContext);
-  const [register, setRegister] = useState(true)
+
   const {formState, onInputChange} = useForms({
    email: '',
    name: '',
@@ -16,8 +16,9 @@ export const LoginPages = () => {
  })
 
  const {email, name, password } = formState;
+ const [message, setMessage] = useState()
 
-
+ 
   const onLogin = async (e) => {
     e.preventDefault();
     if (email < 1) {
@@ -35,12 +36,11 @@ export const LoginPages = () => {
         title: 'Ops',
       });
     } 
-    else{
-      fetchAxios(email, password, name)
-      setRegister(false)
-      login(email, name, password)
+    const data = await fetchAxios(email, password, name)
+    setMessage(data)
+    login(email, name, password)
+   
       
-    }
    ;
   };
 
@@ -100,10 +100,7 @@ export const LoginPages = () => {
             </Grid>
          
         </Grid>
-        {
-          !register ? <span className='text-danger'>Credenciales incorrectas</span>: null
-
-        }
+        <span className='text-danger'>{message}</span>
        
       </form>
     </AuthLayout>

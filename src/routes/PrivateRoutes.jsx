@@ -6,6 +6,7 @@ import { AuthContext } from '../auth/context/AuthContext'
 export const PrivateRoutes = ({children}) => {
 
     const {logged} = useContext(AuthContext)
+   
 
     return (logged)
     ? children

@@ -6,24 +6,27 @@ export const fetchAxios = (email, name, password) => {
 
   const configuration = {
     method: 'post',
-    url: 'https://auth-backend.azurewebsites.net/register',
+    url: 'http://localhost:3000/register',
     data: {
       email,
       name,
       password,
     },
   }
+
+
+
   
-  axios(configuration)
+   return axios(configuration)
   .then((data) => { 
-    console.log(data)
-    localStorage.setItem('message', data.data.message)
-    localStorage.setItem('status', data.status)
+ 
     
+    
+   return data.data.message
     
   })
   .catch((error) => {
-     console.log(error)
+     return error.response.data.message
   });
 }
 

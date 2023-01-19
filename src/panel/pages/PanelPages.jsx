@@ -3,7 +3,9 @@ import { Navbar } from "../../ui/Navbar"
 import { SideBar } from "../../ui/SideBar"
 
 export const PanelPages = () => {
- 
+
+
+
   const drawWithd = 240
   return (
 
@@ -16,7 +18,7 @@ export const PanelPages = () => {
       <h1>Panel Principal</h1>
       <hr />
     </div>
-  
+    
 
 
     </>

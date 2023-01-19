@@ -9,7 +9,8 @@ const init = () => {
   return {
     logged: !!email,
     email: email,
-    name: name
+    name: name,
+    admin: false,
     
   };
 };

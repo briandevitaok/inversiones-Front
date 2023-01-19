@@ -9,7 +9,7 @@ import { AuthLayout } from '../layout/AuthLayout'
 
 export const RegisterPages = () => {
 
-    const [message, setMessage] = useState(false)
+    const [message, setMessage] = useState()
 
     const { formState, onInputChange, onResetInput} = useForms({
       email: '',
@@ -21,16 +21,10 @@ export const RegisterPages = () => {
     const {email, name, password} = formState;
 
     
-    const onLogin = (e) => {
+    const onRegister = async (e) => {
         e.preventDefault()
-        fetchAxios(email, name, password)
-        const status = localStorage.getItem('status')
-        if (status == 201) {
-          setMessage(true) 
-          
-        } else {
-          setMessage(false)
-        }
+        const data = await fetchAxios(email, name, password)
+        setMessage(data)
            
     }
 
@@ -40,7 +34,7 @@ export const RegisterPages = () => {
   return (
     <>
     <AuthLayout  title="Reistro">
-      <form onSubmit={onLogin} >
+      <form onSubmit={onRegister} >
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -87,18 +81,16 @@ export const RegisterPages = () => {
               type='submit' 
               variant="contained" 
               fullWidth
-              onClick={onResetInput}
+              // onClick={onResetInput}
               >
                 Crear cuenta
               </Button>
-              <span className='text-success text-center'>{
-              message ? <span>Usuario creado</span> : 
-              null}</span>
+             
             </Grid>
             </Grid>
-         
+            
         </Grid>
-
+        <span className='text-success'>{message}</span>
       </form>
     </AuthLayout>
     

@@ -19,7 +19,7 @@ export const fetchAxios = (email, password, name) => {
           path: '/panel',
         });
 
-        window.location.replace('/panel');
+        // window.location.replace('/panel');
       } else {
         error.message({
           error: 'error',

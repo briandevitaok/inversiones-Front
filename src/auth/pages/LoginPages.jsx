@@ -5,10 +5,11 @@ import { fetchAxios } from '../../helpers/axios';
 import { AuthLayout } from '../layout/AuthLayout';
 import { Button, Grid, TextField} from '@mui/material';
 import { useForms } from '../../hooks/useForm';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginPages = () => {
   const {login} = useContext(AuthContext);
-
+  const navigate = useNavigate()
   const {formState, onInputChange} = useForms({
    email: '',
    name: '',
@@ -39,7 +40,9 @@ export const LoginPages = () => {
     const data = await fetchAxios(email, password, name)
     setMessage(data)
     login(email, name, password)
-   
+    navigate('/panel', {
+      replace:true
+    })
       
    ;
   };

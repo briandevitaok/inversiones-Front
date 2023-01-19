@@ -4,7 +4,7 @@ const cookies = new Cookies();
 export const fetchAxios = (email, password, name) => {
   const configuration = {
     method: 'post',
-    url: 'We couldn’t deploy your site. Check out our Build docs for tips on troubleshooting your build, and if that doesn’t help, please review our Support Guide on extended debugging before asking us for debugging advice.',
+    url: 'https://auth-backend.azurewebsites.net/login',
     data: {
       email,
       password,

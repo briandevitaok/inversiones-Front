@@ -5,7 +5,7 @@ import { fetchAxios } from '../../helpers/axios';
 import { AuthLayout } from '../layout/AuthLayout';
 import { Button, Grid, TextField} from '@mui/material';
 import { useForms } from '../../hooks/useForm';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginPages = () => {
   const {login} = useContext(AuthContext);
@@ -100,6 +100,9 @@ export const LoginPages = () => {
                 Login
               </Button>
             </Grid>
+            <Link  to="/auth/register">
+              Crear una cuenta
+            </Link>
             </Grid>
          
         </Grid>

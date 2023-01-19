@@ -100,10 +100,10 @@ export const LoginPages = () => {
                 Login
               </Button>
             </Grid>
-            <Link  to="/auth/register">
+            {/* <Link  to="/auth/register">
               Crear una cuenta
             </Link>
-            </Grid>
+            </Grid> */}
          
         </Grid>
         <span className='text-danger'>{message}</span>

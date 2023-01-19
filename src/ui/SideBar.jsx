@@ -56,12 +56,12 @@ export const SideBar = ({ drawWithd }) => {
       }}
     >
       <ListItem>
-        <ListItemAvatar>
+        {/* <ListItemAvatar>
           <Avatar>
             <EmailIcon />
           </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary={email}/>
+        </ListItemAvatar> */}
+        {/* <ListItemText primary={email}/> */}
       </ListItem>
       <Divider variant="inset" component="li" />
       <ListItem>

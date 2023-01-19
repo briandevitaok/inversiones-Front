@@ -15,7 +15,9 @@ export const fetchAxios = (email, password, name) => {
   
   axios(configuration)
   .then((result) => { 
+  
     if (result.status === 200) {
+  
       cookies.set("TOKEN", result.data.token, {
         path:"/panel"
       })

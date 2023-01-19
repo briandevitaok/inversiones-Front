@@ -48,8 +48,9 @@ export const LoginPages = () => {
     } 
     else{
       fetchAxios(email, password, name)
-      login(email, name, password)
       setRegister(false)
+      login(email, name, password)
+      
     }
    ;
   };

@@ -102,8 +102,8 @@ export const LoginPages = () => {
             </Grid>
             {/* <Link  to="/auth/register">
               Crear una cuenta
-            </Link>
-            </Grid> */}
+            </Link> */}
+            </Grid>
          
         </Grid>
         <span className='text-danger'>{message}</span>

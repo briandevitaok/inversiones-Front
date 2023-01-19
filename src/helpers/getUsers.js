@@ -6,3 +6,6 @@ export const getUsers = async () => {
           let user = data.response
         return user
 }
+
+//Esta como nota
+

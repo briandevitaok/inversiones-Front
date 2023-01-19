@@ -3,31 +3,20 @@ import swal from 'sweetalert2';
 import { AuthContext } from '../context/AuthContext';
 import { fetchAxios } from '../../helpers/axios';
 import { AuthLayout } from '../layout/AuthLayout';
-import { Button, Grid, Link, TextField, Typography } from '@mui/material';
+import { Button, Grid, TextField} from '@mui/material';
+import { useForms } from '../../hooks/useForm';
 
 export const LoginPages = () => {
   const {login} = useContext(AuthContext);
   const [register, setRegister] = useState(true)
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const {formState, onInputChange} = useForms({
+   email: '',
+   name: '',
+   password: '',
+ })
 
+ const {email, name, password } = formState;
 
-  const inputName = (e) => {
-    const name = e.target.value;
-    setName(name);
-  };
-
-  const inputEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-  };
-
-  const inputPassword = (e) => {
-    const password = e.target.value;
-
-    setPassword(password);
-  };
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -69,7 +58,7 @@ export const LoginPages = () => {
               placeholder="example@gmail.com"
               fullWidth
               name='email'
-              onChange={inputEmail}
+              onChange={onInputChange}
              
               
             />
@@ -82,7 +71,7 @@ export const LoginPages = () => {
               placeholder="Name"
               fullWidth
               name='name'
-              onChange={inputName}
+              onChange={onInputChange}
             />
           </Grid>
 
@@ -94,7 +83,7 @@ export const LoginPages = () => {
               placeholder="password"
               fullWidth
               name='password'
-              onChange={inputPassword}
+              onChange={onInputChange}
             />
           </Grid>
 

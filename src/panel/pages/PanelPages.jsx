@@ -1,5 +1,4 @@
-import { useState } from "react"
-import { getUsers } from "../../helpers/getUsers"
+
 import { Navbar } from "../../ui/Navbar"
 import { SideBar } from "../../ui/SideBar"
 

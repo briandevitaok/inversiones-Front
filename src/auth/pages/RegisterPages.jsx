@@ -9,33 +9,21 @@ import { AuthLayout } from '../layout/AuthLayout'
 
 export const RegisterPages = () => {
 
-
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
     const [message, setMessage] = useState(false)
 
-    
+    const { formState, onInputChange, onResetInput} = useForms({
+      email: '',
+      name: '',
+      password: '',
 
+    })
 
-    const inputName = (e) => {
-        setName(e.target.value);
-      };
-    
-      const inputEmail = (e) => {
-        setEmail(e.target.value)
-      };
-    
-      const inputPassword = (e) => {
-        setPassword(e.target.value);
-      };
+    const {email, name, password} = formState;
+
     
     const onLogin = (e) => {
         e.preventDefault()
         fetchAxios(email, name, password)
-        setEmail('')
-        setName('')
-        setPassword('')
         const status = localStorage.getItem('status')
         if (status == 201) {
           setMessage(true) 
@@ -62,7 +50,7 @@ export const RegisterPages = () => {
               fullWidth
               name='email'
               value={email}
-              onChange={inputEmail}
+              onChange={onInputChange}
              
               
             />
@@ -76,7 +64,7 @@ export const RegisterPages = () => {
               fullWidth
               name='name'
               value={name}
-              onChange={inputName}
+              onChange={onInputChange}
             />
           </Grid>
 
@@ -89,7 +77,7 @@ export const RegisterPages = () => {
               fullWidth
               name='password'
               value={password}
-              onChange={inputPassword}
+              onChange={onInputChange}
             />
           </Grid>
 
@@ -99,6 +87,7 @@ export const RegisterPages = () => {
               type='submit' 
               variant="contained" 
               fullWidth
+              onClick={onResetInput}
               >
                 Crear cuenta
               </Button>

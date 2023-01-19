@@ -4,7 +4,7 @@ const cookies = new Cookies();
 export const fetchAxios = (email, password, name) => {
   const configuration = {
     method: 'post',
-    url: 'http://localhost:3000/login',
+    url: 'https://auth-backend.azurewebsites.net/login',
     data: {
       email,
       password,

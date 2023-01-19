@@ -6,7 +6,7 @@ export const fetchAxios = (email, name, password) => {
 
   const configuration = {
     method: 'post',
-    url: 'http://localhost:3000/register',
+    url: 'https://auth-backend.azurewebsites.net/register',
     data: {
       email,
       name,
